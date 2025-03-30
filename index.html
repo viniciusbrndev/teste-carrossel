@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel Automático</title>
+    <style>
+        body{
+            background-color: rgb(15, 3, 52);
+            
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 330px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-top: 7px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            flex-shrink: 0;
+            display: block;
+            size: cover;
+            max-height: 1350;
+        }
+        .barra{
+            background-color: aliceblue;
+            max-width: 280px;
+            height: 3px;
+            border-radius: 4px;
+            margin: auto;
+            margin-top: 10px;
+        }
+        .text{
+            max-width: 330px;
+            margin: auto;
+            color: aliceblue;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        iframe{
+            max-width: 300px;
+            margin: auto;
+            display: block;
+            height: 130px;
+            margin-bottom: -30px;
+        }
+        
+    </style>
+</head>
+<body>
+    <iframe  autoplay style="border-radius:12px" src="https://open.spotify.com/embed/track/2RUTvhNHo2DEECnumWFG0o?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="carousel">
+        
+        <div class="carousel-inner">
+            <img src="img/img01.png" alt="Imagem 1">
+            <img src="img/img02.jpg" alt="Imagem 2">
+            <img src="img/img03.png" alt="Imagem 3">
+            <img src="img/img04.png" alt="Imagem 4">
+        </div>
+    </div>
+    <div class="barra"></div>
+    <div class="text">
+        <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur temporibus vitae eaque voluptas sequi dolore rem. Nobis doloremque distinctio enim, corrupti cupiditate maiores, neque eum consequatur ab, quia eius alias?
+        </p>
+    </div>
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel-inner img');
+        const totalImages = images.length;
+        const carouselInner = document.querySelector('.carousel-inner');
+
+        function nextImage() {
+            if (currentIndex < totalImages - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            carouselInner.style.transform = `translateX(${offset}%)`;
+        }
+
+        let autoplayInterval = setInterval(nextImage, 3000);
+
+        carouselInner.parentElement.addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+
+        carouselInner.parentElement.addEventListener('mouseleave', () => {
+            autoplayInterval = setInterval(nextImage, 3000);
+        });
+    </script>
+</body>
+</html>
